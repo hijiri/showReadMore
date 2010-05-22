@@ -6,7 +6,7 @@
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.5.18
+ * @version   10.5.22
  */
 
 ●"続きを読む"のリンクを表示して記事を折りたたむプラグイン
@@ -31,24 +31,29 @@ function writeReadMoreLink(id, readText, hideText){
 }
 
 function readMoreFunc(id, readText, hideText) {
-    targetObj      = '#targetId' + id;
-    targetLnk      = '#linkId' + id;
+    // SETTING BEGIN
+    // Effect type
     var effect     = 'blind';
+    // Effect time
     var effectTime = 1000;
+    // SETTING END
 
-    if ($(targetObj).is(":hidden")) {
-        $(targetLnk).text(hideText);
-        $(targetLnk).removeClass("showlink");
-        $(targetLnk).addClass("hidelink");
-        $(targetLnk).attr("title", "ID " + id + ":" + hideText);
-    } else {
-        $(targetLnk).text(readText);
-        $(targetLnk).removeClass("hidelink");
-        $(targetLnk).addClass("showlink");
-        $(targetLnk).attr("title", "ID " + id + ":" + readText);
-    }
+    targetObj = '#targetId' + id;
+    targetLnk = '#linkId' + id;
 
-    $(targetObj).toggle(effect, effectTime);
+    $(targetObj).toggle(effect, effectTime, function() {
+        if ($(targetObj).is(":hidden")) {
+            $(targetLnk).text(readText);
+            $(targetLnk).removeClass("hidelink");
+            $(targetLnk).addClass("showlink");
+            $(targetLnk).attr("title", "ID " + id + ":" + readText);
+        } else {
+            $(targetLnk).text(hideText);
+            $(targetLnk).removeClass("showlink");
+            $(targetLnk).addClass("hidelink");
+            $(targetLnk).attr("title", "ID " + id + ":" + hideText);
+        }
+    });
 }
 /* ---------------- Add End ---------------- */
 

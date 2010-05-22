@@ -7,7 +7,7 @@
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.5.18
+ * @version   10.5.22
  */
 
 $this->plugin->addFilter('permalink-view', 'removeReadMore', 1);
@@ -22,10 +22,10 @@ function showReadMore($text)
     $targetStartTag = '<!-- more -->';
     $targetEndTag   = '<!-- /more -->';
     // Link text
-    $readMore = '続きを読む';
-    $hideMore = '続きを隠す';
-    //$readMore = 'Read more';
-    //$hideMore = 'Return';
+    $readText = '続きを読む';
+    $hideText = '続きを隠す';
+    //$readText = 'Read more';
+    //$hideText = 'Return';
     // SETTING END
 
     // Get string length and position
@@ -47,7 +47,6 @@ function showReadMore($text)
     }
 
     if ($targetSPosition && $targetEPosition) {
-
         // Debug.... (Not a Good Idea)
         $item = debug_backtrace();
         $id   = $item['3']['args']['0']['id'];
@@ -55,7 +54,6 @@ function showReadMore($text)
         // Split text
         $visibleFStr = mb_substr($text, 0, $targetSPosition);
         $hideStr     = mb_substr($text, $targetSPosition, $targetEPosition + $targeETagLen - $targetSPosition);
-        // Text End (insufficient)
         if (($targetEPosition + $targeETagLen) !== $textLen) {
             $visibleRStr = mb_substr($text, $targetEPosition + $targeETagLen);
         } else {
@@ -63,9 +61,9 @@ function showReadMore($text)
         }
 
         // Markup
-        $readLink   = '<script type="text/javascript">writeReadMoreLink(\'' . $id . '\', \'' . $readMore . '\', \'' . $hideMore . '\');</script>';
-        $hideLink   = '<p class="read-more"><a href="javascript:readMoreFunc(\'' . $id . '\', \'' . $readMore . '\', \'' . $hideMore . '\');" class="hidelink" title="ID ' . $id . ':' . $hideMore . '">' . $hideMore . '</a></p>';
-        $noscript   = '<noscript><p class="read-more"><a href="./index.php?id=' . $id . '" title="ID ' . $id . ':' . $readMore . '" class="showlink">' . $readMore . '</a></p></noscript>';
+        $readLink   = '<script type="text/javascript">writeReadMoreLink(\'' . $id . '\', \'' . $readText . '\', \'' . $hideText . '\');</script>';
+        $hideLink   = '<p class="read-more"><a href="javascript:readMoreFunc(\'' . $id . '\', \'' . $readText . '\', \'' . $hideText . '\');" class="hidelink" title="ID ' . $id . ':' . $hideText . '">' . $hideText . '</a></p>';
+        $noscript   = '<noscript><p class="read-more"><a href="./index.php?id=' . $id . '" title="ID ' . $id . ':' . $readText . '" class="showlink">' . $readText . '</a></p></noscript>';
         $targetDiv  = '<div id="targetId' . $id . '" class="toggle">';
 
         // Replace
@@ -85,10 +83,10 @@ function removeReadMore($text)
     global $targetStartTag, $targetEndTag;
 
     // Replace limited
-    $text = mb_ereg_replace("<script type=\"text/javascript\">writeReadMoreLink(.+);</script>", '', $text);
+    $text = mb_ereg_replace("<script type=\"text/javascript\">writeReadMoreLink\(.+\);</script>", '', $text);
     $text = mb_ereg_replace("<noscript><p class=\"read-more\"><a href=\"\./index.php\?id=[0-9]{1,}\" title=\"ID [0-9]{1,}:.+\" class=\"showlink\">.+</a></p></noscript>", '', $text);
     $text = mb_ereg_replace("<div id=\"targetId[0-9]{1,}\" class=\"toggle\">", $targetStartTag, $text);
-    $text = mb_ereg_replace("<p class=\"read-more\"><a href=\"javascript:readMoreFunc(.+);\" class=\"hidelink\" title=\"ID [0-9]{1,}:.+\">.+</a></p></div>", $targetEndTag, $text);
+    $text = mb_ereg_replace("<p class=\"read-more\"><a href=\"javascript:readMoreFunc\(.+\);\" class=\"hidelink\" title=\"ID [0-9]{1,}:.+\">.+</a></p></div>", $targetEndTag, $text);
 
     return $text;
 }
