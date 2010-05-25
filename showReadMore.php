@@ -1,13 +1,13 @@
 <?php
 /**
- * Loggix_Plugin - Show ReadMore Link beta
+ * Loggix_Plugin - Show ReadMore Link
  *
  * @copyright Copyright (C) UP!
  * @author    hijiri
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.5.22
+ * @version   10.5.26
  */
 
 $this->plugin->addFilter('permalink-view', 'removeReadMore', 1);
@@ -38,16 +38,16 @@ function showReadMore($text)
     // Out of order
     if ($targetEPosition <= $targetSPosition) {
         $targetSPosition = FALSE;
-    // No contents (insufficient)
+    // No contents
     } elseif (($targetEPosition - $targeETagLen) == $targetSPosition){
         $targetSPosition = FALSE;
     // Found two or more
-    } elseif (mb_strpos($text, $targetStartTag, $targetSPosition+$targeSTagLen) || mb_strpos($text, $targetEndTag, $targetEPosition+$targeETagLen)) {
+    } elseif (mb_strpos($text, $targetStartTag, $targetSPosition + $targeSTagLen) || mb_strpos($text, $targetEndTag, $targetEPosition + $targeETagLen)) {
         $targetSPosition = FALSE;
     }
 
     if ($targetSPosition && $targetEPosition) {
-        // Debug.... (Not a Good Idea)
+        // Get ID (debug... NOT A GOOD IDEA)
         $item = debug_backtrace();
         $id   = $item['3']['args']['0']['id'];
 
@@ -90,4 +90,3 @@ function removeReadMore($text)
 
     return $text;
 }
-

@@ -1,12 +1,12 @@
 /**
- * Loggix_Plugin - Show ReadMore Link beta
+ * Loggix_Plugin - Show ReadMore Link
  *
  * @copyright Copyright (C) UP!
  * @author    hijiri
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.5.22
+ * @version   10.5.26
  */
 
 ●"続きを読む"のリンクを表示して記事を折りたたむプラグイン
@@ -63,6 +63,9 @@ function readMoreFunc(id, readText, hideText) {
 
 ■使用方法
 記事を投稿する際に折りたたみたい文章を<!-- more -->と<!-- /more -->で挟んでください。<!-- more -->～<!-- /more -->の前後のHTMLの整合性はチェックしません。結果的にHTMLタグが入れ子になった場合の動作はどうなるか分かりません。
+
+■その他
+JavaScriptで行っている"続きを読む"リンクのタイトル属性の書き換えが、qTipのツールチップ表示に反映されない既知の問題があります。
 
 ■サポート
 作者多忙の為サポート出来ません。意見/感想はContactからご連絡ください。
