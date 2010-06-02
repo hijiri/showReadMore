@@ -6,7 +6,7 @@
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.5.28
+ * @version   10.6.2
  */
 
 ●"続きを読む"のリンクを表示して記事を折りたたむプラグイン
@@ -41,7 +41,7 @@ function readMoreFunc(id, readText, hideText) {
     targetObj = '#targetId' + id;
     targetLnk = '#linkId' + id;
 
-    $(targetObj).toggle(effect, effectTime, function() {
+    $(targetObj).toggle(effect, '', effectTime, function() {
         if ($(targetObj).is(":hidden")) {
             $(targetLnk).text(readText);
             $(targetLnk).removeClass("hidelink");
@@ -71,5 +71,6 @@ JavaScriptで行っている"続きを読む"リンクのタイトル属性の�
 作者多忙の為サポート出来ません。意見/感想はContactからご連絡ください。
 
 ■更新履歴
+2010-06-02:jQuery UI Ver1.8.1に対応
 2010-05-28:公開
 2010-05-18:beta版公開
