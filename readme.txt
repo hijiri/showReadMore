@@ -6,7 +6,7 @@
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.6.3
+ * @version   10.6.5
  */
 
 ●"続きを読む"のリンクを表示して記事を折りたたむプラグイン
@@ -39,8 +39,8 @@ $(function() {
         //hideText  = 'Return';
         // SETTING END
 
-        targetLnk = $(this);
-        id = targetLnk.attr('href').match(/\?id=([0-9]{1,})/)[1];
+        id = $(this).attr('href').match(/\?id=([0-9]{1,})/)[1];
+        targetLnk = $('.read-more a[rel=Bookmark][title^=ID ' + id + ']');
         targetObj = $('#targetId' + id);
 
         targetObj.toggle(effect, '', effectTime, function() {
@@ -75,7 +75,8 @@ JavaScriptで行っている"続きを読む"リンクのタイトル属性の�
 作者多忙の為サポート出来ません。意見/感想はContactからご連絡ください。
 
 ■更新履歴
-2010-06-03:正常に置換出来ない場合があるバグとJavaScriptを修正。
+2010-06-05:JavaScriptで余計な文字まで書換えるバグを修正
+2010-06-03:正常に置換出来ない場合があるバグとJavaScriptを修正
 2010-06-02:jQuery UI Ver1.8.1に対応
 2010-05-28:公開
 2010-05-18:beta版公開

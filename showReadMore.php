@@ -7,7 +7,7 @@
  * @link      http://tkns.homelinux.net/
  * @license   http://www.opensource.org/licenses/bsd-license.php  New BSD License
  * @since     2010.04.28
- * @version   10.6.3
+ * @version   10.6.5
  */
 
 $this->plugin->addFilter('permalink-view', 'removeReadMore', 1);
